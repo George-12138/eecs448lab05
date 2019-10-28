@@ -12,10 +12,10 @@
       font-size: 10pt;
     }
     th{
-      color:#2a363b;
+      color:black;
       border: 2px solid black;
       border-radius: 5px;
-      font-size: 20pt;
+      font-size: 15pt;
     }
     </style>
   </head>
@@ -23,9 +23,9 @@
     <form action = "DeletePost.php" method = "POST">
     <table>
     <tr>
-      <td>Author</td>
-      <td>Post  </td>
-      <td>Delete?</td>
+      <th>author</th>
+      <th>posts </th>
+      <th>Delete?</th>
     </tr>
     <?php
     $mysqli = new mysqli("mysql.eecs.ku.edu","c712g285", "ooch9AiV", "c712g285");
@@ -34,25 +34,26 @@
         printf("Connect failed: %s\n", $mysqli->connect_error);
         exit();
     }
+
     $query = "SELECT author_id, content, post_id FROM Posts ORDER BY author_id ASC";
     if ($result = $mysqli->query($query))
     {
     	while ($row = $result->fetch_assoc())
     	{
-    		$author = $row["author_id"];
+    		$author_id = $row["author_id"];
     		$content = $row["content"];
     		$post_id = $row["post_id"];
     		echo "<tr><td>";
-    		echo $author;
+    		echo $author_id;
     		echo "</td><td>";
     		echo $content;
     		echo "</td><td>";
-    		echo "<input type='checkbox' name = 'checkbox[]' value = '";
+    		echo "<input type='checkbox' name = checkbox[]'";
     		echo $post_id;
     		echo "'>";
     		echo "</td></tr>";
         	}
-    	echo "<tr><td colspan = 3><input type='submit' value = 'Submit'></td></tr>";
+    	echo "<tr><td colspan = 3><input type='submit' value = 'submit'></td></tr>";
         	$result->free();
     }
     $mysqli->close();

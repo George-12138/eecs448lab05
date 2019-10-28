@@ -1,23 +1,25 @@
 
 <?php
 $mysqli = new mysqli("mysql.eecs.ku.edu", "c712g285", "ooch9AiV", "c712g285");
-/* check connection */
-if ($mysqli->connect_errno) {
+
+if ($mysqli->connect_errno)
+{
     printf("Connect failed: %s\n", $mysqli->connect_error);
     exit();
 }
+
+
 $delete = $_POST["checkbox"];
 foreach($delete as $value)
 {
 	$query = "DELETE FROM Posts WHERE post_id = '$value'";
-	if($mysqli->query($query) === TRUE)
+	if($mysqli->query($query) === TRUE)//if deleted
 	{
-		echo "Post id: " .$value. " deleted.";
-		echo "<br>";
+		echo "the post-- " .$value. " has been deleted.";
 	}
 	else
 	{
-		echo "Error: " . $sql . "<br>" . $mysqli->error;
+		echo "Fault!" . $sql . $mysqli->error;
 	}
 }
 /* close connection */
